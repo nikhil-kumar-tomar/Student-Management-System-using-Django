@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Attendance</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'students/bootstrap.min.css' %}">
+</head>
+<style>
+    td {
+        text-align: center;
+    }
+</style>
+<body style="background-color:#212529;">
+
+    {% if user.is_authenticated %}
+        <form action="" method="POST">
+            <table class="table table-dark table-hover">
+            {% csrf_token %}
+            {% for x in users %}
+            <tr>
+                <td>{{x.roll}}</td>
+                <td style="text-align: left;">{{x.name}}</td>
+                <td>
+                    <div class="form-check">
+                    <label for="attend"></label>
+                    <input type="checkbox" name="{{x.roll}}">
+                </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </table>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+            {% else %}
+            <p>You are not authorized to view this Page</p>
+            {% endif %}
+</body>
+</html>

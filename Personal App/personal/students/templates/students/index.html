@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    {% if user.is_staff %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for x in form %}
+            {{x.0}} <br>
+            <hr>            
+            {{x.1}} <br>
+            <hr>
+            {{x.2}} <br>
+            <hr>            
+            {{x.3}} <br>
+            <hr>
+        {% endfor %}
+        <input type="Submit" value="Submit">
+    </form>
+    {% else %}
+    <p>You are not authorized to View this Page</p>
+    {% endif %}
+</body>
+</html>

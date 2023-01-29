@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'students/bootstrap.min.css' %}">
+</head>
+<style>
+    body {
+      background-color: #212529;
+    }
+    .vertical-center {
+      margin:0 auto;
+      width:300px;
+      transform: translateY(30%);
+    }
+</style>
+  
+<body>
+    {% if user.is_authenticated %}
+    <a href="students/"><button class="btn btn-primary mb-3">Students Management</button></a>
+    <br>
+    <a href="students/registration/"><button class="btn btn-primary mb-3">Students Registration</button></a>
+    <br>
+    <a href="students/logout/"><button class="btn btn-primary mb-3">Logout</button></a>
+    <br>
+    {% else %}
+    <a href="students/login/"><button class="btn btn-primary mb-3">Login</button></a>
+     <br>
+    <a href="students/registration/"><button class="btn btn-primary mb-3">Students Registration</button></a> 
+    <br>
+    {% endif %}
+</body>
+</html>
