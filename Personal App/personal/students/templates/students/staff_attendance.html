@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load authentication %}
+{% from_staff user as token%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,19 +17,22 @@
 </style>
 <body style="background-color:#212529;">
 
-    {% if user.is_authenticated %}
+    {% if token %}
         <form action="" method="POST">
             <table class="table table-dark table-hover">
+                <tr >
+                <th style="text-align: center;">Roll</th>
+                <th>Name</th>
+                <th style="text-align: center;">Present</th>
+            </tr>
             {% csrf_token %}
             {% for x in users %}
             <tr>
                 <td>{{x.roll}}</td>
                 <td style="text-align: left;">{{x.name}}</td>
                 <td>
-                    <div class="form-check">
                     <label for="attend"></label>
                     <input type="checkbox" name="{{x.roll}}">
-                </div>
                 </td>
             </tr>
             {% endfor %}
@@ -36,7 +41,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
             {% else %}
-            <p>You are not authorized to view this Page</p>
+            <p style="color: white;">You are not authorized to view this Page</p>
             {% endif %}
 </body>
 </html>

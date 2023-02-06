@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load authentication %}
+{% from_staff user as token%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +9,7 @@
     <title>Index</title>
 </head>
 <body>
-    {% if user.is_staff %}
+    {% if token %}
     <form action="" method="POST">
         {% csrf_token %}
         {% for x in form %}
@@ -24,6 +26,8 @@
     </form>
     {% else %}
     <p>You are not authorized to View this Page</p>
+    
     {% endif %}
+
 </body>
 </html>

@@ -22,5 +22,6 @@ def validate_name(name):
         return True
     else:
         return False
+
 def object_creator(factor,model):
     eval(model).objects.create(**factor)
