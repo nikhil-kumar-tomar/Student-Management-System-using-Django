@@ -65,6 +65,9 @@ def completed(request):
 def update(request):
     form = roll_s()
     if request.method == 'POST':
+        if object_exists({"roll":request.POST['roll']},model="studs")==False:
+            messages.error(request,f"The roll Number {request.POST['roll']} does not exist")
+            return HttpResponseRedirect("/students/update/")
         form = roll_s(request.POST)
         if form.is_valid():
             return HttpResponseRedirect(f"/students/update/{request.POST['roll']}")

@@ -25,3 +25,25 @@ def validate_name(name):
 
 def object_creator(factor,model):
     eval(model).objects.create(**factor)
+
+def object_filter(factor,model):
+    # factor is a dictionary {"email":"abc@ghmail.com"} < usage is here, arguments are supposed to be passed like this
+    # Model is supposed to be passed as a string object like model="User" where User is the name of the model you are refering to
+    return eval(model).objects.filter(**factor)
+def object_exists(factor,model):
+    return eval(model).objects.filter(**factor).exists()
+
+def object_filter_orderby(factor,model,orderby):
+    # factor is a dictionary {"email":"abc@ghmail.com"} < usage is here, arguments are supposed to be passed like this
+    # Model is supposed to be passed as a string object like model="User" where User is the name of the model you are refering to
+    return eval(model).objects.filter(**factor).order_by(orderby)
+
+def object_all(model):
+    # factor is a dictionary {"email":"abc@ghmail.com"} < usage is here, arguments are supposed to be passed like this
+    # Model is supposed to be passed as a string object like model="User" where User is the name of the model you are refering to
+    return eval(model).objects.all()
+
+def object_remove(factor,model):
+    # factor is a dictionary {"email":"abc@ghmail.com"} < usage is here, arguments are supposed to be passed like this
+    # Model is supposed to be passed as a string object like model="User" where User is the name of the model you are refering to
+    return eval(model).objects.filter(**factor)
