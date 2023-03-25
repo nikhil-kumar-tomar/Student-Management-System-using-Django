@@ -20,6 +20,9 @@ body {
 }
   </style>
 <body>
+  {% for messg in messages %}
+  {{messg}}
+  {% endfor %}
     <div class="h-100 d-flex align-items-center justify-content-center">
     <form action="", method="POST" class="form-group vertical-center">
         {% csrf_token %}
@@ -36,8 +39,5 @@ body {
         </div>
       </form>
     </div>
-    {% for messg in messages %}
-    {{messg}}
-    {% endfor %}
 </body>
 </html>

@@ -28,11 +28,11 @@
             {% csrf_token %}
             {% for x in users %}
             <tr>
-                <td>{{x.roll}}</td>
+                <td>{{x.roll_id}}</td>
                 <td style="text-align: left;">{{x.name}}</td>
                 <td>
                     <label for="attend"></label>
-                    <input type="checkbox" name="{{x.roll}}">
+                    <input type="checkbox" name="{{x.roll_id}}">
                 </td>
             </tr>
             {% endfor %}

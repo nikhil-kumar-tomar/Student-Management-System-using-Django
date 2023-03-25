@@ -94,14 +94,14 @@ def registration(request):
     form=user_create()
     if request.method=="POST":
         form=user_create(request.POST)
-        if duplicate_entries_preventer(factor={'email':request.POST["email"]},model="User"):
+        if object_exists(factor={'email':request.POST["email"]},model="User"):
             messages.error(request,"Email Already Exists, Please use a different email")
             return HttpResponseRedirect("/students/registration/")
         if form.is_valid():
             form.save()
             messages.success(request,"Signed-Up Succesfully")
             add_to_students(User.objects.get(username=request.POST["username"]))
-            studs.objects.create(name=request.POST["first_name"]+" "+request.POST["last_name"],email=request.POST["email"])
+            object_creator({"name":request.POST["first_name"]+" "+request.POST["last_name"],"email":request.POST["email"],"roll_id":User.objects.get(username=request.POST["username"]).id},model="studs")
             return HttpResponseRedirect("/students/login/")
 
     context={
@@ -115,7 +115,7 @@ def logins(request):
         if users != None:
             login(request,users)
             messages.success(request,f"Welcome {request.user.first_name}, You have Logged In Succesfully")
-            return HttpResponseRedirect("/students/completed")
+            return HttpResponseRedirect("/students/status")
         else:
             messages.error(request,"Email/Password does not exist")
             return HttpResponseRedirect("/students/login/")
@@ -136,12 +136,15 @@ def take_attendance(request):
     users=[x for x in studs.objects.all()]
     if request.method=="POST":
         for x in users:
-            if str(x.roll) in request.POST  and object_exists({"roll":x.roll},model="studs"):
-                object_creator(factor={'roll_id':x.roll,'date':format(datetime.now(),"%Y-%m-%d"),'attend':1},model="attendance")
+            if str(x.roll_id) in request.POST:
+                object_creator(factor={'roll_id':x.roll_id,'date':format(datetime.now(),"%Y-%m-%d"),'attend':1},model="attendance")
             else:
-                object_creator(factor={'roll_id':x.roll,'date':format(datetime.now(),"%Y-%m-%d"),'attend':0},model="attendance")
+                object_creator(factor={'roll_id':x.roll_id,'date':format(datetime.now(),"%Y-%m-%d"),'attend':0},model="attendance")
         return HttpResponseRedirect("/students/take_attendance/") 
     context={
         "users":users,
         }
     return render(request,"students/staff_attendance.html",context)
+def status(request):
+    context={"student":object_get(factor={"roll_id":request.user.id},model="studs"),"attendance":object_filter({"roll_id":request.user.id},model="attendance")}
+    return render(request,"students/status.html",context)

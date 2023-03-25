@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load authentication %}
+{% from_staff user as token%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="delay_time; URL=www.google.com" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/bootstrap.min.css' %}">
+    <title>Status</title>
+</head>
+<style>
+    body {background-color:#212529;
+    }
+</style>
+<body>
+    {% if not token %}
+    <div>
+        <table class="table table-dark table-hover table-bordered">
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td>{{student.roll_id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.email}}</td>
+            </tr>
+        </table>
+    </div>
+    <h3>Attendance Below</h3>
+    <div>
+        <table class="table table-dark table-hover table-bordered">
+            <tr>
+                <th>date</th>
+                <th>Attendance</th>
+            </tr>
+            <tr>
+                <td>{{attendancw.date}}</td>
+                <td>{{student.attend}}</td>
+            </tr>
+        </table>
+    </div>
+
+    {% else %}
+    <p>You are not authorized to View this Page</p>
+    
+    {% endif %}
+</body>
+</html>
