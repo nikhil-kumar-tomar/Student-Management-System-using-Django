@@ -135,14 +135,11 @@ def logouts(request):
 def take_attendance(request):
     users=[x for x in studs.objects.all()]
     if request.method=="POST":
-        users=[x.roll for x in studs.objects.all()]
-        # print(request.POST)
-        attended_students=[x for x in request.POST if request.POST[x]=="on"]
         for x in users:
-            if str(x) in attended_students:
-                object_creator(factor={'roll_id':x,'date':format(datetime.now(),"%Y-%m-%d"),'attend':1},model="attendance")
+            if str(x.roll) in request.POST  and object_exists({"roll":x.roll},model="studs"):
+                object_creator(factor={'roll_id':x.roll,'date':format(datetime.now(),"%Y-%m-%d"),'attend':1},model="attendance")
             else:
-                object_creator(factor={'roll_id':x,'date':format(datetime.now(),"%Y-%m-%d"),'attend':0},model="attendance")
+                object_creator(factor={'roll_id':x.roll,'date':format(datetime.now(),"%Y-%m-%d"),'attend':0},model="attendance")
         return HttpResponseRedirect("/students/take_attendance/") 
     context={
         "users":users,
