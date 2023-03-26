@@ -9,6 +9,9 @@ def add_to_staff(users):
     gro=Group.objects.get(name="staff")
     users.groups.add(gro)
 
+def user_group(users,group):
+    return users.groups.filter(name=group).exists()
+
 def object_exists(factor,model):
     # factor is a dictionary {"email":"abc@ghmail.com"} < usage is here, arguments are supposed to be passed like this
     # Model is supposed to be passed as a string object like model="User" where User is the name of the model you are refering to

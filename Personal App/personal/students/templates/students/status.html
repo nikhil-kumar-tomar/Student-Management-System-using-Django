@@ -38,10 +38,17 @@
                 <th>date</th>
                 <th>Attendance</th>
             </tr>
+            {% for attendance in attendance  %}
             <tr>
-                <td>{{attendancw.date}}</td>
-                <td>{{student.attend}}</td>
+                
+                <td>{{attendance.date}}</td>
+                {% if attendance.attend %}
+                <td>Present</td>
+                {% else %}
+                <td>Not Present</td>
+                {% endif %}
             </tr>
+            {% endfor %}
         </table>
     </div>
 

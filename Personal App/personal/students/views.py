@@ -140,11 +140,15 @@ def take_attendance(request):
                 object_creator(factor={'roll_id':x.roll_id,'date':format(datetime.now(),"%Y-%m-%d"),'attend':1},model="attendance")
             else:
                 object_creator(factor={'roll_id':x.roll_id,'date':format(datetime.now(),"%Y-%m-%d"),'attend':0},model="attendance")
-        return HttpResponseRedirect("/students/take_attendance/") 
+            messages.success(request,"Attendance Registered Successfully")
+        return HttpResponseRedirect("/") 
     context={
         "users":users,
         }
     return render(request,"students/staff_attendance.html",context)
 def status(request):
-    context={"student":object_get(factor={"roll_id":request.user.id},model="studs"),"attendance":object_filter({"roll_id":request.user.id},model="attendance")}
-    return render(request,"students/status.html",context)
+    if user_group(users=object_get({"id":request.user.id},model="User"),group="students"):
+        context={"student":object_get(factor={"roll_id":request.user.id},model="studs"),"attendance":object_filter({"roll_id":request.user.id},model="attendance")}
+        return render(request,"students/status.html",context)
+    else:
+        return HttpResponseRedirect("/")
