@@ -5,10 +5,11 @@ from .miscellaneous import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from datetime import datetime
+from django.conf import settings
 
 # Create your views here.
 def see_all(request):
-    stu_class=studs.objects.all()
+    stu_class=cache_object_get_or_set("users",[x for x in object_all("studs")],settings.CACHES_TTL)
     context={
         'stu_class':stu_class,
     }
@@ -133,7 +134,7 @@ def logouts(request):
         return HttpResponseRedirect("/students/login/")
 
 def take_attendance(request):
-    users=[x for x in studs.objects.all()]
+    users=cache_object_get_or_set("users",[x for x in object_all("studs")],settings.CACHES_TTL)
     if request.method=="POST":
         for x in users:
             if str(x.roll_id) in request.POST:

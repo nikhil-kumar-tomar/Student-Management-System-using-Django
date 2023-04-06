@@ -22,7 +22,12 @@ This option require Roll Number, Name and Email, Basically all the information f
 # 4. Update already existing Record of a Student
 This option requires a roll number, filling roll number will show pre-populated form fields with information already available in the database, updating this fields and submitting will affect the database.
  
- 
+
+# Installation
+1. Edit the .env file with your configuration and copy it to "Student-Management-System-using-Django/Personal App/personal/personal"
+2. In the same directory run `pip install -r requirements.txt`
+3. Run `python3 manage.py runserver `
+
 # Configuration for Backend applications# Django Admin Page
 
 admin page at: localhost:8000/admin
@@ -31,17 +36,6 @@ Username: admin
 
 Password: Nick@123
  
- 
-# MySQL Database configurations
-Database Name: personal
-
-Database User: root
-
-Database Password: 123456789
-
-Database Host: localhost
-
-Database Port: 3306
  
  
 # Extras

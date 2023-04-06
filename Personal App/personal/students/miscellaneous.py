@@ -1,5 +1,31 @@
 from django.contrib.auth.models import User,Group
 from .models import *
+from django.core.cache import cache
+def custom_commands(command:str):
+    """
+    This function taked command as string input,
+    It just executes all your written commands from this file,
+    The reason for this is to make your views.py cleaner,
+    By importing most functions in another file and use when needed
+    """
+    exec(command)
+
+def cache_object_set(key:str,value:any,Default_Timeout:int=None,NX:bool=False):
+    """
+    Function to set object in cache,
+    both NX and EX methods are supported,
+    """
+    if NX:
+        cache.add(key,value,Default_Timeout)
+    else:
+        cache.set(key,value,Default_Timeout)
+
+def cache_object_get_or_set(key:str,value:any,Default_Timeout:int=None):
+    """
+    Get or Set, If value doesn't exist in cache it creates the value,
+    If value already exists in cache it just retrieves it
+    """
+    return cache.get_or_set(key,value,Default_Timeout)
 
 def add_to_students(users):
     gro=Group.objects.get(name="students")

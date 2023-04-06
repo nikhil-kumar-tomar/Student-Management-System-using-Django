@@ -21,9 +21,9 @@
         </tr>
         {% for sts in stu_class %}
         <tr>
-            <td style="color: white; width:10%; text-align: left;">{{sts.roll}}</td>
+            <td style="color: white; width:10%; text-align: left;">{{sts.roll_id}}</td>
             <td>
-            <a style="color:pink;" href="/students/{{sts.roll}}">{{sts.name}}</a>
+            <a style="color:pink;" href="/students/{{sts.roll_id}}">{{sts.name}}</a>
             </td>  
         </tr>
         {% endfor %}
