@@ -20,6 +20,14 @@ def cache_object_set(key:str,value:any,Default_Timeout:int=None,NX:bool=False):
     else:
         cache.set(key,value,Default_Timeout)
 
+def cache_object_get(key:str):
+    """
+    Function to set object in cache,
+    both NX and EX methods are supported,
+    """
+    return cache.get(key)
+
+
 def cache_object_get_or_set(key:str,value:any,Default_Timeout:int=None):
     """
     Get or Set, If value doesn't exist in cache it creates the value,

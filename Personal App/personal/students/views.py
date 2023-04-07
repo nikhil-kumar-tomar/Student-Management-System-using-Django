@@ -6,7 +6,6 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from datetime import datetime
 from django.conf import settings
-
 # Create your views here.
 def see_all(request):
     stu_class=cache_object_get_or_set("users",[x for x in object_all("studs")],settings.CACHES_TTL)
@@ -134,7 +133,12 @@ def logouts(request):
         return HttpResponseRedirect("/students/login/")
 
 def take_attendance(request):
-    users=cache_object_get_or_set("users",[x for x in object_all("studs")],settings.CACHES_TTL)
+    token=cache_object_get_or_set(f"token:{request.user.id}",user_group(request.user,"staff"),settings.CACHES_TTL)
+    if token:
+        users=cache_object_get_or_set("users",object_all("studs"),settings.CACHES_TTL)
+    else:
+        users=None
+
     if request.method=="POST":
         for x in users:
             if str(x.roll_id) in request.POST:
@@ -145,6 +149,7 @@ def take_attendance(request):
         return HttpResponseRedirect("/") 
     context={
         "users":users,
+        "token":token,
         }
     return render(request,"students/staff_attendance.html",context)
 def status(request):

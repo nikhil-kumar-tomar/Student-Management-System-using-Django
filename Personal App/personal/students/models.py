@@ -6,7 +6,7 @@ class studs(models.Model):
     roll=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
     email=models.EmailField(max_length=254,null=True,unique=True)
     def __str__(self):
-        return f"{self.roll} , {self.name} , {self.email}"
+        return f"{self.roll_id} , {self.name} , {self.email}"
 class attendance(models.Model):
     roll=models.ForeignKey(studs,to_field="roll",on_delete=models.CASCADE)
     date=models.DateField()
