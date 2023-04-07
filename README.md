@@ -43,4 +43,4 @@ For this Project I have also provided a Virtual Environment of Python using Pipe
 
 # Update
 
-Now the web-app is equipped with Login authentication for students as well as the staff members for the same, Moreover Bootstrap is also used for many of its frontend works.
+Now the web-app is equipped with Login authentication for students as well as the staff members for the same Moreover Bootstrap is also used for many of its frontend works.
