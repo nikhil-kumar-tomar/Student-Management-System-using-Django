@@ -8,14 +8,14 @@ from datetime import datetime
 from django.conf import settings
 # Create your views here.
 def see_all(request):
-    stu_class=cache_object_get_or_set("users",[x for x in object_all("studs")],settings.CACHES_TTL)
+    stu_class=cache_object_get_or_set("users",object_all("studs"),settings.CACHES_TTL)
     context={
         'stu_class':stu_class,
     }
     return render(request,"students/all databases.html",context)
 
 def student(request,roll):
-    student_info=studs.objects.get(roll=roll)
+    student_info=object_get({"roll":roll},"studs")
     context={
         'student':student_info,
     }
@@ -41,6 +41,7 @@ def index(request):
         form=indexes()
     context={
         'form':form,
+        'token':cache_object_get_or_set(f"token:{request.user.id}",user_group(request.user,"staff"),settings.CACHES_TTL)
     }
     return render(request,"students/index.html",context)
 
