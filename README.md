@@ -27,14 +27,6 @@ This option requires a roll number, filling roll number will show pre-populated 
 1. Edit the .env file with your configuration and copy it to "Student-Management-System-using-Django/Personal App/personal/personal"
 2. In the same directory run `pip install -r requirements.txt`
 3. Run `python3 /Personal App/personal/manage.py runserver `
-
-# Configuration for Backend applications# Django Admin Page
-
-admin page at: localhost:8000/admin
-
-Username: admin
-
-Password: Nick@123
  
  
  
