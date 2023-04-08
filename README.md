@@ -34,5 +34,4 @@ This option requires a roll number, filling roll number will show pre-populated 
 For this Project I have also provided a Virtual Environment of Python using Pipenv, This virtual environment can be easily used without installing every package used in this project.
 
 # Update
-
 Now the web-app is equipped with Login authentication for students as well as the staff members for the same, Moreover Bootstrap is also used for many of its frontend works.
