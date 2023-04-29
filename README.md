@@ -28,10 +28,6 @@ This option requires a roll number, filling roll number will show pre-populated 
 2. In the same directory run `pip install -r requirements.txt`
 3. Run `python3 /Personal App/personal/manage.py runserver `
  
- 
- 
-# Extras
-For this Project I have also provided a Virtual Environment of Python using Pipenv, This virtual environment can be easily used without installing every package used in this project.
 
 # Update
 
